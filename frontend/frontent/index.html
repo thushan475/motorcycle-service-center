@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Log In · Workshop Ops</title>
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+<div class="auth-page">
+
+  <div class="auth-card">
+
+    <p class="auth-subtitle">
+      Motorcycle Service &amp; Spare Parts Management
+    </p>
+
+    <div class="auth-error" id="login-error"></div>
+
+    <form id="login-form">
+
+      <div class="form-field">
+        <label for="username">Username</label>
+
+        <input
+                type="text"
+                id="username"
+                required
+                autocomplete="username"
+        >
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+
+        <input
+                type="password"
+                id="password"
+                required
+                autocomplete="current-password"
+        >
+      </div>
+
+      <button
+              type="submit"
+              class="btn btn-primary"
+              style="width:100%"
+              id="login-btn"
+      >
+        Log in
+      </button>
+
+    </form>
+
+  </div>
+
+</div>
+
+<div id="toast-stack"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="js/ajax/auth-api.js"></script>
+
+<script src="js/ui.js"></script>
+
+<script>if (localStorage.getItem('mc_token')) {
+
+  window.location.href = 'dashboard.html';
+}
+
+$('#login-form').on('submit', function (e) {
+
+  e.preventDefault();
+
+  const username = $('#username')
+          .val()
+          .trim();
+
+  const password = $('#password')
+          .val();
+
+  $('#login-error')
+          .hide()
+          .text('');
+
+  $('#login-btn')
+          .prop('disabled', true)
+          .text('Logging in...');
+
+  AuthApi.login({
+    username: username,
+    password: password
+  })
+
+          .then(function (data) {
+
+            localStorage.setItem(
+                    'mc_token',
+                    data.token
+            );
+
+            localStorage.setItem(
+                    'mc_username',
+                    data.username
+            );
+
+            localStorage.setItem(
+                    'mc_role',
+                    data.role
+            );
+
+            window.location.href = 'dashboard.html';
+
+          })
+
+          .catch(function (err) {
+
+            $('#login-error')
+                    .text(
+                            err.message ||
+                            'Login failed.'
+                    )
+                    .show();
+
+          })
+
+});
+</script>
+
+</body>
+</html>
