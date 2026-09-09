@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suppliers · Workshop Ops</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside id="sidebar"></aside>
+  <div>
+    <header id="topbar"></header>
+    <main class="content">
+      <div class="toolbar">
+        <div class="toolbar-left">
+          <input type="text" class="search-input" id="search-input" placeholder="Search suppliers...">
+
+        </div>
+        <button class="btn btn-primary" id="add-btn">+ New Supplier</button>
+      </div>
+      <div id="table-container"></div>
+    </main>
+  </div>
+</div>
+
+<div id="drawer-overlay"></div>
+<div id="drawer">
+  <div class="drawer-header">
+    <h2 id="drawer-title">Form</h2>
+    <button class="drawer-close" onclick="UI.closeDrawer()">&times;</button>
+  </div>
+  <form id="drawer-form" style="display:flex; flex-direction:column; flex:1; min-height:0;">
+    <div class="drawer-scroll">
+      <div class="drawer-error" id="drawer-error"></div>
+      <div id="drawer-body"></div>
+    </div>
+    <div class="drawer-footer">
+      <button type="button" class="btn" onclick="UI.closeDrawer()">Cancel</button>
+      <button type="submit" class="btn btn-primary" id="drawer-submit">Save</button>
+    </div>
+  </form>
+</div>
+
+<div id="confirm-overlay">
+  <div class="confirm-box">
+    <p id="confirm-message">Are you sure?</p>
+    <div class="confirm-actions">
+      <button class="btn" id="confirm-no">Cancel</button>
+      <button class="btn btn-danger" id="confirm-yes">Delete</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast-stack"></div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/ajax/suppliers-api.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pages/suppliers.js"></script>
+</body>
+</html>
