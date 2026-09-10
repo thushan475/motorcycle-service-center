@@ -118,6 +118,10 @@ normal `USER` account, not an `ADMIN` account.
 
 | Problem | Likely Fix |
 |---|---|
+
+
+
+https://documenter.getpostman.com/view/58095478/2sBYAyrnnf - my postman api testing
 | Nothing loads / network error | Backend is not running, or the URL in `js/ajax/*.js` is wrong |
 | Sent back to the login page | Your session/token expired - log in again |
 | Some menu items are missing | That page is ADMIN-only, and you are logged in as USER |
